@@ -22,6 +22,7 @@ import (
 )
 
 func (msgCtl *MsgCtl) unpack(typeByte byte, buffer []byte, msgIn Message) (msg Message, err error) {
+	buffer = buffer[1:]
 	if msgIn == nil {
 		t, ok := msgCtl.typeMap[typeByte]
 		if !ok {
@@ -62,5 +63,5 @@ func (msgCtl *MsgCtl) Pack(msg Message) ([]byte, error) {
 	_ = buffer.WriteByte(typeByte)
 	_ = binary.Write(buffer, binary.BigEndian, int64(len(content)))
 	_, _ = buffer.Write(content)
-	return buffer.Bytes(), nil
+	return append([]byte{0}, buffer.Bytes()...), nil
 }
