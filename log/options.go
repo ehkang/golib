@@ -3,7 +3,7 @@ package log
 import (
 	"io"
 
-	"github.com/fatedier/golib/clock"
+	"github.com/ehkang/golib/clock"
 )
 
 // An Option configures a Logger.
